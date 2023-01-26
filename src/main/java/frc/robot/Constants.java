@@ -8,6 +8,9 @@ import java.util.function.Supplier;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
  * constants. This class should not be used for any other purpose. All constants should be declared
@@ -32,6 +35,29 @@ public final class Constants {
         public final static Supplier<Double> driveMax = () -> {
            return SmartDashboard.getNumber("robot speed", 0.8);            
         };
+    }
+
+    }
+    
+
+    public static class Conversions {
+        
+        public static double angleToTicks(double angle){
+            return Constants.Values.TICKS_PER_REVOLUTIONS / ((double) 360 / angle);
+        }
+
+        public static double ticksToAngle(double ticks){
+            return (ticks * 360.0)/ Constants.Values.TICKS_PER_REVOLUTIONS;
+        }
+    }
+    public static class MotorPorts{
+        public static final int
+            FLY_WHEEL_PORT = 0; 
+    }
+    
+    public static class Motors {
+        public static final WPI_TalonSRX
+            FLY_WHEEL = new WPI_TalonSRX(MotorPorts.FLY_WHEEL_PORT);
     }
 
 }
