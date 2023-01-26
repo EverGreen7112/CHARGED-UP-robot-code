@@ -7,6 +7,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.commands.EncoderPositionPID;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -18,6 +19,8 @@ public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
 
   private RobotContainer m_robotContainer;
+
+  public EncoderPositionPID wheelPositionPID;
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -87,11 +90,21 @@ public class Robot extends TimedRobot {
   public void testInit() {
     // Cancels all running commands at the start of test mode.
     CommandScheduler.getInstance().cancelAll();
+
+    wheelPositionPID = new EncoderPositionPID(Constants.Motors.FLY_WHEEL,
+     Constants.Values.WHEEL_POSITION_PID_KP, 
+     Constants.Values.WHEEL_POSITION_PID_KI, 
+     Constants.Values.WHEEL_POSITION_PID_KD, 
+     Constants.Values.TICKS_PER_REVOLUTIONS * 1, 
+     Constants.Values.WHEEL_POSITION_PID_TOLERANCE);
   }
 
   /** This function is called periodically during test mode. */
   @Override
-  public void testPeriodic() {}
+  public void testPeriodic() {
+    CommandScheduler.getInstance().schedule(wheelPositionPID);
+  }
+
 
   /** This function is called once when the robot is first started up. */
   @Override
