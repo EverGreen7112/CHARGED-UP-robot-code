@@ -3,8 +3,8 @@ package frc.robot.commands;
 import com.ctre.phoenix.motorcontrol.TalonSRXControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-
-public class EncoderPositionPID extends CommandBase {
+//for TalonSRX only
+public class TalonSRXPositionPID extends CommandBase {
     private TalonSRX m_talon;
     private double m_kp;
     private double m_ki;
@@ -20,7 +20,7 @@ public class EncoderPositionPID extends CommandBase {
      * @param target - target of pid
      * @param tolerance - the allowed tolerance in ticks.
      */
-    public EncoderPositionPID(TalonSRX talon, double kp, double ki, double kd, double target, double tolerance){
+    public TalonSRXPositionPID(TalonSRX talon, double kp, double ki, double kd, double target, double tolerance){
       m_talon = talon;
       m_kp = kp;
       m_ki = ki;

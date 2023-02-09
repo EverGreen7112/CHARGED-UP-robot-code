@@ -28,7 +28,6 @@ public final class Constants {
 
     }
     
-
     public static class Conversions {
         
         public static double angleToTicks(double angle){
