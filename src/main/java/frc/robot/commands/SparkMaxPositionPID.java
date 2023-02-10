@@ -26,6 +26,11 @@ public class SparkMaxPositionPID extends CommandBase{
     @Override
     public void execute() {
         m_pidController.setReference(m_target, ControlType.kPosition);
-    
     }
+
+    public void setTarget(double target){
+        m_target = target;
+    }
+
+
 }

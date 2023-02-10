@@ -20,11 +20,23 @@ public final class Constants {
         public static final int
                 TICKS_PER_REVOLUTIONS = 8196;
                 
+                
         public static final double
                 WHEEL_POSITION_PID_TOLERANCE = 0.5
                 ,WHEEL_POSITION_PID_KP = 0.01 * 9
                 ,WHEEL_POSITION_PID_KI = 0.00000
-                ,WHEEL_POSITION_PID_KD = 0.000001;
+                ,WHEEL_POSITION_PID_KD = 0.000001
+                ,TURN_SWERVE_WHEEL_PID_KP = 0.02
+                ,TURN_SWERVE_WHEEL_PID_KI = 0
+                ,TURN_SWERVE_WHEEL_PID_KD = 0
+                ,DRIVE_SWERVE_WHEEL_PID_KP = 0.02
+                ,DRIVE_SWERVE_WHEEL_PID_KI = 0
+                ,DRIVE_SWERVE_WHEEL_PID_KD = 0
+                ;
+
+
+
+
 
     }
     
@@ -37,6 +49,28 @@ public final class Constants {
         public static double ticksToAngle(double ticks){
             return (ticks * 360.0)/ Constants.Values.TICKS_PER_REVOLUTIONS;
         }
+
+                /**
+         * Get the closest angle between the given angles.
+         */
+        public static double closestAngle(double a, double b)
+        {
+                // get direction
+                double dir = modulo(b, 360.0) - modulo(a, 360.0);
+
+                // convert from -360 to 360 to -180 to 180
+                if (Math.abs(dir) > 180.0)
+                {
+                        dir = -(Math.signum(dir) * 360.0) + dir;
+                }
+                return dir;
+        }
+        
+        public static double modulo(double a, double b) {
+            return ((a % b)+ b )% b;
+        }
+
+
     }
     public static class MotorPorts{
         public static final int
