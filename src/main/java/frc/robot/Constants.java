@@ -32,12 +32,8 @@ public final class Constants {
                 ,DRIVE_SWERVE_WHEEL_PID_KP = 0.02
                 ,DRIVE_SWERVE_WHEEL_PID_KI = 0
                 ,DRIVE_SWERVE_WHEEL_PID_KD = 0
+                ,SWERVE_WHEEL_RADIUS = 0
                 ;
-
-
-
-
-
     }
     
     public static class Conversions {
@@ -65,16 +61,35 @@ public final class Constants {
                 }
                 return dir;
         }
-        
+                
         public static double modulo(double a, double b) {
             return ((a % b)+ b )% b;
         }
 
+        public static double rpm2ms(double rpm){
+            double rps = rpm / 60;
+            return Constants.Values.SWERVE_WHEEL_RADIUS * 2 * Math.PI * rps;
+        }
+
+        public static double ms2rpm(double ms){
+           double rps = ms / Constants.Values.SWERVE_WHEEL_RADIUS / 2 / Math.PI;
+            return 60 * rps;
+        }
+        
 
     }
     public static class MotorPorts{
         public static final int
-            FLY_WHEEL_PORT = 0; 
+            FLY_WHEEL_PORT = 0,
+            RIGHT_UP_DRIVE_MOTOR_PORT = 0,
+            RIGHT_UP_TURN_MOTOR_PORT = 0,
+            LEFT_UP_DRIVE_MOTOR_PORT = 0,
+            LEFT_UP_TURN_MOTOR_PORT = 0,
+            RIGHT_DOWN_DRIVE_MOTOR_PORT = 0,
+            RIGHT_DOWN_TURN_MOTOR_PORT = 0,
+            LEFT_DOWN_DRIVE_MOTOR_PORT = 0,
+            LEFT_DOWN_TURN_MOTOR_PORT = 0;
+        
     }
     
     public static class Motors {
