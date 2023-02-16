@@ -8,11 +8,20 @@ public class Swerve {
     private SwerveWheel m_rightDown;
     private SwerveWheel m_leftDown;
 
+    private Swerve m_instance;
+    
     public Swerve(){
         this.m_rightUp = new SwerveWheel(Constants.MotorPorts.RIGHT_UP_DRIVE_MOTOR_PORT, Constants.MotorPorts.RIGHT_UP_TURN_MOTOR_PORT);
         this.m_leftUp = new SwerveWheel(Constants.MotorPorts.LEFT_UP_DRIVE_MOTOR_PORT, Constants.MotorPorts.LEFT_UP_DRIVE_MOTOR_PORT);
         this.m_rightDown = new SwerveWheel(Constants.MotorPorts.RIGHT_DOWN_DRIVE_MOTOR_PORT, Constants.MotorPorts.RIGHT_DOWN_DRIVE_MOTOR_PORT);
         this.m_leftDown = new SwerveWheel(Constants.MotorPorts.LEFT_DOWN_DRIVE_MOTOR_PORT, Constants.MotorPorts.LEFT_DOWN_DRIVE_MOTOR_PORT);
+    }
+
+    public Swerve getInstance(){
+        if(m_instance == null){
+            m_instance = new Swerve();
+        }
+        return m_instance;
     }
 
     public void set(double angle, double ms){
