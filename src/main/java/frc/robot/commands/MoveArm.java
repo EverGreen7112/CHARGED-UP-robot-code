@@ -16,12 +16,9 @@ public class MoveArm extends CommandBase {
     private double arm1Angle; // the angle the first arm in degrees
     private double arm2Angle; // the angle the second arm in degrees
     private double pointsVecLength; // the length of the vector of the points
-    public double destinationX;
-    public double destinationY;
 
     public MoveArm(double x, double y){
-        destinationX = x;
-        destinationY = y;
+        destination = new Vector2d(x, y);
     }
 
     @Override
@@ -31,7 +28,6 @@ public class MoveArm extends CommandBase {
 
     @Override
     public void execute(){
-        destination = new Vector2d(destinationX, destinationY);
         CalcAngles();
         if (Possible()) {
             Arm.getInstance().turnFirstTo(arm1Angle);
