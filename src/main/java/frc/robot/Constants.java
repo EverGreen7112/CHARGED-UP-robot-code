@@ -4,6 +4,10 @@
 
 package frc.robot;
 
+import java.util.function.Supplier;
+
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
  * constants. This class should not be used for any other purpose. All constants should be declared
@@ -22,6 +26,12 @@ public final class Constants {
         RIGHT_MIDDLE_PORT = 0,
         RIGHT_BACK_PORT = 0
         ;
+    }
+    
+    public final static  class Speeds{
+        public final static Supplier<Double> driveMax = () -> {
+           return SmartDashboard.getNumber("robot speed", 0.8);            
+        };
     }
 
 }
