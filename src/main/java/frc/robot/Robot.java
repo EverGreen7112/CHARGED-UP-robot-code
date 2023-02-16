@@ -91,20 +91,12 @@ public class Robot extends TimedRobot {
   public void testInit() {
     // Cancels all running commands at the start of test mode.
     CommandScheduler.getInstance().cancelAll();
-
-    wheelPositionPID = new TalonSRXPositionPID(Constants.Motors.FLY_WHEEL,
-     Constants.Values.WHEEL_POSITION_PID_KP, 
-     Constants.Values.WHEEL_POSITION_PID_KI, 
-     Constants.Values.WHEEL_POSITION_PID_KD, 
-     Constants.Values.TICKS_PER_REVOLUTIONS * 1, 
-     Constants.Values.WHEEL_POSITION_PID_TOLERANCE);
-
   }
 
   /** This function is called periodically during test mode. */
   @Override
   public void testPeriodic() {
-    CommandScheduler.getInstance().schedule(wheelPositionPID);
+    
   }
 
 
