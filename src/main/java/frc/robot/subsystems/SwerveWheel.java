@@ -6,6 +6,7 @@ import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.CANSparkMax.ControlType;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import edu.wpi.first.wpilibj.drive.Vector2d;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -61,5 +62,10 @@ public class SwerveWheel extends SubsystemBase{
     public void setSpeed(double speed){
         m_drivePVelocityPIDController.setReference(Constants.Conversions.ms2rpm(speed) , ControlType.kVelocity);
     }
-    
+
+    public double getSpeed(){
+        return Constants.Conversions.ms2rpm(m_driveEncoder.getVelocity());
+    }
+
+       
 }

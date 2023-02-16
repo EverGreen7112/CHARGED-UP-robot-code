@@ -33,6 +33,9 @@ public final class Constants {
                 ,DRIVE_SWERVE_WHEEL_PID_KI = 0
                 ,DRIVE_SWERVE_WHEEL_PID_KD = 0
                 ,SWERVE_WHEEL_RADIUS = 0
+                ,SWERVE_LENGTH = 0
+                ,SWERVE_WIDTH = 0
+                
                 ;
     }
     
@@ -90,6 +93,11 @@ public final class Constants {
             LEFT_DOWN_DRIVE_MOTOR_PORT = 0,
             LEFT_DOWN_TURN_MOTOR_PORT = 0;
         
+    }
+    public static class ControllerPorts{
+        public static final int
+            RIGHT_JOYSTICK_PORT = 0,
+            LEFT_JOYSTICK_PORT = 0; 
     }
     
     public static class Motors {

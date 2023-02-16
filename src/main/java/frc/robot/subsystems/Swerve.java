@@ -1,53 +1,82 @@
 package frc.robot.subsystems;
+import edu.wpi.first.math.kinematics.ChassisSpeeds;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
-public class Swerve {
+public class Swerve extends SubsystemBase{
 
-    private SwerveWheel m_rightUp;
-    private SwerveWheel m_leftUp;
-    private SwerveWheel m_rightDown;
-    private SwerveWheel m_leftDown;
+    private SwerveWheel m_rightFront;
+    private SwerveWheel m_leftFront;
+    private SwerveWheel m_rightBack;
+    private SwerveWheel m_leftBack;
 
-    private Swerve m_instance;
+    public static final Swerve swerve = new Swerve(); //get instance
     
     public Swerve(){
-        this.m_rightUp = new SwerveWheel(Constants.MotorPorts.RIGHT_UP_DRIVE_MOTOR_PORT, Constants.MotorPorts.RIGHT_UP_TURN_MOTOR_PORT);
-        this.m_leftUp = new SwerveWheel(Constants.MotorPorts.LEFT_UP_DRIVE_MOTOR_PORT, Constants.MotorPorts.LEFT_UP_DRIVE_MOTOR_PORT);
-        this.m_rightDown = new SwerveWheel(Constants.MotorPorts.RIGHT_DOWN_DRIVE_MOTOR_PORT, Constants.MotorPorts.RIGHT_DOWN_DRIVE_MOTOR_PORT);
-        this.m_leftDown = new SwerveWheel(Constants.MotorPorts.LEFT_DOWN_DRIVE_MOTOR_PORT, Constants.MotorPorts.LEFT_DOWN_DRIVE_MOTOR_PORT);
-    }
-
-    public Swerve getInstance(){
-        if(m_instance == null){
-            m_instance = new Swerve();
-        }
-        return m_instance;
+        this.m_rightFront = new SwerveWheel(Constants.MotorPorts.RIGHT_UP_DRIVE_MOTOR_PORT, Constants.MotorPorts.RIGHT_UP_TURN_MOTOR_PORT);
+        this.m_leftFront = new SwerveWheel(Constants.MotorPorts.LEFT_UP_DRIVE_MOTOR_PORT, Constants.MotorPorts.LEFT_UP_DRIVE_MOTOR_PORT);
+        this.m_rightBack = new SwerveWheel(Constants.MotorPorts.RIGHT_DOWN_DRIVE_MOTOR_PORT, Constants.MotorPorts.RIGHT_DOWN_DRIVE_MOTOR_PORT);
+        this.m_leftBack = new SwerveWheel(Constants.MotorPorts.LEFT_DOWN_DRIVE_MOTOR_PORT, Constants.MotorPorts.LEFT_DOWN_DRIVE_MOTOR_PORT);
     }
 
     public void set(double angle, double ms){
-        m_rightUp.turnTo(angle);
-        m_rightDown.turnTo(angle);
-        m_leftUp.turnTo(angle);
-        m_leftDown.turnTo(angle);
+        m_rightFront.turnTo(angle);
+        m_rightBack.turnTo(angle);
+        m_leftFront.turnTo(angle);
+        m_leftBack.turnTo(angle);
 
-        m_rightUp.setSpeed(ms);
-        m_leftUp.setSpeed(ms);
-        m_rightDown.setSpeed(ms);
-        m_leftDown.setSpeed(ms);
+        m_rightFront.setSpeed(ms);
+        m_leftFront.setSpeed(ms);
+        m_rightBack.setSpeed(ms);
+        m_leftBack.setSpeed(ms);
     }
+    public void set(double rightFrontAngle, double rightBackAngle, double leftFrontAngle, double leftBackAngle, 
+    double rightFrontSpeed, double rightBackSpeed, double leftFrontSpeed, double leftBackSpeed){
+        m_rightFront.turnTo(rightFrontAngle);
+        m_rightBack.turnTo(rightBackAngle);
+        m_leftFront.turnTo(leftFrontAngle);
+        m_leftBack.turnTo(leftBackAngle);
 
+        m_rightFront.setSpeed(rightFrontSpeed);
+        m_leftFront.setSpeed(rightBackSpeed);
+        m_rightBack.setSpeed(leftFrontSpeed);
+        m_leftBack.setSpeed(leftBackSpeed);
+    }
     public void setWheelsAngle(double angle){
-        m_rightUp.turnTo(angle);
-        m_rightDown.turnTo(angle);
-        m_leftUp.turnTo(angle);
-        m_leftDown.turnTo(angle);
+        m_rightFront.turnTo(angle);
+        m_rightBack.turnTo(angle);
+        m_leftFront.turnTo(angle);
+        m_leftBack.turnTo(angle);
     }
     
     public void setWheelsSpeed(double ms){
-        m_rightUp.setSpeed(ms);
-        m_leftUp.setSpeed(ms);
-        m_rightDown.setSpeed(ms);
-        m_leftDown.setSpeed(ms);
+        m_rightFront.setSpeed(ms);
+        m_leftFront.setSpeed(ms);
+        m_rightBack.setSpeed(ms);
+        m_leftBack.setSpeed(ms);
     }
 
+    public void drive (double x1, double y1, double x2) {
+        double L = Constants.Values.SWERVE_LENGTH;
+        double W = Constants.Values.SWERVE_WIDTH;
+        double r = Math.sqrt ((L * L) + (W * W));
+        y1 *= -1;
+    
+        double a = x1 - x2 * (L / r);
+        double b = x1 + x2 * (L / r);
+        double c = y1 - x2 * (W / r);
+        double d = y1 + x2 * (W / r);
+    
+        double rightBackSpeed = Math.sqrt ((a * a) + (d * d));
+        double leftBackSpeed = Math.sqrt ((a * a) + (c * c));
+        double rightFrontSpeed = Math.sqrt ((b * b) + (d * d));
+        double leftFrontSpeed = Math.sqrt ((b * b) + (c * c));
+    
+        double rightBackAngle = Math.atan2 (a, d) / Math.PI;
+        double leftBackAngle = Math.atan2 (a, c) / Math.PI;
+        double rightFrontAngle = Math.atan2 (b, d) / Math.PI;
+        double leftFrontAngle = Math.atan2 (b, c) / Math.PI;
+
+        set(rightFrontAngle, rightBackAngle, leftFrontAngle, leftBackAngle, rightFrontSpeed, rightBackSpeed, leftFrontSpeed, leftBackSpeed);        
+    }
 }
