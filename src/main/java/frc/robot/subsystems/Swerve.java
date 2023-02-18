@@ -72,10 +72,10 @@ public class Swerve extends SubsystemBase{
         double rightFrontSpeed = Math.sqrt ((b * b) + (d * d));
         double leftFrontSpeed = Math.sqrt ((b * b) + (c * c));
     
-        double rightBackAngle = Math.atan2 (a, d) / Math.PI;
-        double leftBackAngle = Math.atan2 (a, c) / Math.PI;
-        double rightFrontAngle = Math.atan2 (b, d) / Math.PI;
-        double leftFrontAngle = Math.atan2 (b, c) / Math.PI;
+        double rightBackAngle = Math.atan2 (a, d) / Math.PI * 180;
+        double leftBackAngle = Math.atan2 (a, c) / Math.PI * 180;
+        double rightFrontAngle = Math.atan2 (b, d) / Math.PI * 180;
+        double leftFrontAngle = Math.atan2 (b, c) / Math.PI * 180;
 
         set(rightFrontAngle, rightBackAngle, leftFrontAngle, leftBackAngle, rightFrontSpeed, rightBackSpeed, leftFrontSpeed, leftBackSpeed);        
     }
