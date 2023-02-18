@@ -100,6 +100,10 @@ public final class Constants {
             LEFT_JOYSTICK_PORT = 0; 
     }
     
+    public static class GeneralPorts{
+        public static final int
+            NAVX_PORT = 0;
+    }
     public static class Motors {
         public static final WPI_TalonSRX
             FLY_WHEEL = new WPI_TalonSRX(MotorPorts.FLY_WHEEL_PORT);
