@@ -15,6 +15,12 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  *
  * <p>It is advised to statically import this class (or one of its inner classes) wherever the
  * constants are needed, to reduce verbosity.
+ * </p>
+ * Conventions:
+ * <ul>
+ * <li> Distance in meters</li>
+ * <li> Angles in degrees</li>
+ * </ul>
  */
 public final class Constants {
     public final class Ports{
