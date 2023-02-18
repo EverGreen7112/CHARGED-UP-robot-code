@@ -35,7 +35,7 @@ public final class Constants {
                 ,SWERVE_WHEEL_RADIUS = 0
                 ,SWERVE_LENGTH = 0
                 ,SWERVE_WIDTH = 0
-                
+                ,MAX_SWERVE_SPEED = 3 //in m/s
                 ;
     }
     

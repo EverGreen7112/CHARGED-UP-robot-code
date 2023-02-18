@@ -67,10 +67,10 @@ public class Swerve extends SubsystemBase{
         double c = y1 - x2 * (W / r);
         double d = y1 + x2 * (W / r);
     
-        double rightBackSpeed = Math.sqrt ((a * a) + (d * d));
-        double leftBackSpeed = Math.sqrt ((a * a) + (c * c));
-        double rightFrontSpeed = Math.sqrt ((b * b) + (d * d));
-        double leftFrontSpeed = Math.sqrt ((b * b) + (c * c));
+        double rightBackSpeed = Math.sqrt ((a * a) + (d * d))  * Constants.Values.MAX_SWERVE_SPEED;
+        double leftBackSpeed = Math.sqrt ((a * a) + (c * c))   * Constants.Values.MAX_SWERVE_SPEED;
+        double rightFrontSpeed = Math.sqrt ((b * b) + (d * d)) * Constants.Values.MAX_SWERVE_SPEED;
+        double leftFrontSpeed = Math.sqrt ((b * b) + (c * c))  * Constants.Values.MAX_SWERVE_SPEED;
     
         double rightBackAngle = Math.atan2 (a, d) / Math.PI * 180;
         double leftBackAngle = Math.atan2 (a, c) / Math.PI * 180;
