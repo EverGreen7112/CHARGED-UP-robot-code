@@ -39,39 +39,27 @@ public class Arm extends SubsystemBase {
     }
 
     public void turnFirstTo(double angle) {
-        if (Math.abs(Controls.m_rightJoystick.getX()) < Constants.ArmValues.JOYSTICK_TOLERANCE && Math.abs(Controls.m_rightJoystick.getY()) < Constants.ArmValues.JOYSTICK_TOLERANCE) {
-            return;
-          }
-          double m_JoystickAngle = Math.toDegrees(Math.atan2(Controls.m_rightJoystick.getX(), Controls.m_rightJoystick.getY()));
-          if(m_JoystickAngle <= 0)
-           m_JoystickAngle += 360;
           double m_firstAngle = Constants.Functions.ticksToAngle(m_first.getSelectedSensorPosition());
-          double m_firstTarget = Constants.Functions.angleToTicks(m_firstAngle + Constants.Functions.closestAngle(m_firstAngle, m_JoystickAngle));
-          if (m_JoystickAngle <= m_firstMaxRange && m_JoystickAngle >= m_firstMinRange){
-            if (Math.abs(m_JoystickAngle - Math.abs(Constants.Functions.modulo(Constants.Functions.ticksToAngle(m_firstTarget), 360))) > m_firstMaxRange + Constants.ArmValues.LIMIT_TOLERANCE || Math.abs(m_JoystickAngle - Math.abs(Constants.Functions.modulo(Constants.Functions.ticksToAngle(m_firstTarget), 360))) < m_firstMinRange - Constants.ArmValues.LIMIT_TOLERANCE){
+          double m_firstTarget = Constants.Functions.angleToTicks(m_firstAngle + Constants.Functions.closestAngle(m_firstAngle, m_firstAngle));
+          if (m_firstAngle <= m_firstMaxRange && m_firstAngle >= m_firstMinRange){
+            if (Math.abs(m_firstAngle - Math.abs(Constants.Functions.modulo(Constants.Functions.ticksToAngle(m_firstTarget), 360))) > m_firstMaxRange + Constants.ArmValues.LIMIT_TOLERANCE || Math.abs(m_firstAngle - Math.abs(Constants.Functions.modulo(Constants.Functions.ticksToAngle(m_firstTarget), 360))) < m_firstMinRange - Constants.ArmValues.LIMIT_TOLERANCE){
               m_first.set(TalonFXControlMode.Position, m_firstTarget);
             }
             else {
-              m_first.set(TalonFXControlMode.Position, Constants.Functions.angleToTicks(m_JoystickAngle));
+              m_first.set(TalonFXControlMode.Position, Constants.Functions.angleToTicks(m_firstAngle));
             }
           }
     }
 
     public void turnSecondTo(double angle) {
-        if (Math.abs(Controls.m_rightJoystick.getX()) < Constants.ArmValues.JOYSTICK_TOLERANCE && Math.abs(Controls.m_rightJoystick.getY()) < Constants.ArmValues.JOYSTICK_TOLERANCE) {
-            return;
-          }
-          double m_JoystickAngle = Math.toDegrees(Math.atan2(Controls.m_rightJoystick.getX(), Controls.m_rightJoystick.getY()));
-          if(m_JoystickAngle <= 0)
-           m_JoystickAngle += 360;
           double m_secondAngle = Constants.Functions.ticksToAngle(m_second.getSelectedSensorPosition());
-          double m_secondTarget = Constants.Functions.angleToTicks(m_secondAngle + Constants.Functions.closestAngle(m_secondAngle, m_JoystickAngle));
-          if (m_JoystickAngle <= m_secondMaxRange && m_JoystickAngle >= m_secondMinRange){
-            if (Math.abs(m_JoystickAngle - Math.abs(Constants.Functions.modulo(Constants.Functions.ticksToAngle(m_secondTarget), 360))) > m_secondMaxRange + Constants.ArmValues.LIMIT_TOLERANCE || Math.abs(m_JoystickAngle - Math.abs(Constants.Functions.modulo(Constants.Functions.ticksToAngle(m_secondTarget), 360))) < m_secondMinRange - Constants.ArmValues.LIMIT_TOLERANCE){
+          double m_secondTarget = Constants.Functions.angleToTicks(m_secondAngle + Constants.Functions.closestAngle(m_secondAngle, m_secondAngle));
+          if (m_secondAngle <= m_secondMaxRange && m_secondAngle >= m_secondMinRange){
+            if (Math.abs(m_secondAngle - Math.abs(Constants.Functions.modulo(Constants.Functions.ticksToAngle(m_secondTarget), 360))) > m_secondMaxRange + Constants.ArmValues.LIMIT_TOLERANCE || Math.abs(m_secondAngle - Math.abs(Constants.Functions.modulo(Constants.Functions.ticksToAngle(m_secondTarget), 360))) < m_secondMinRange - Constants.ArmValues.LIMIT_TOLERANCE){
               m_second.set(TalonFXControlMode.Position, m_secondTarget);
             }
             else {
-              m_second.set(TalonFXControlMode.Position, Constants.Functions.angleToTicks(m_JoystickAngle));
+              m_second.set(TalonFXControlMode.Position, Constants.Functions.angleToTicks(m_secondAngle));
             }
           }
     }
