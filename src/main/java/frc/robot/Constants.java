@@ -47,7 +47,27 @@ public final class Constants {
     public static class MotorPorts {
         public static final int 
                 FIRST_ARM_PORT = 0
-                ,SECOND_ARM_PORT = 0;
+                ,SECOND_ARM_PORT = 0
+                ,GRIPPER_PORT = 0;
+    }
+
+    public static class ButtonPorts {
+        public static final int
+                GRAB = 0,
+                OPEN_GRIPPER = 2,
+                CLOSE_GRIPPER = 3;
+    }
+    
+    public static class JoystickPorts {
+        public static final int 
+                rightJoystick = 0,
+                leftJoystick = 1,
+                operator = 2;
+    }
+
+    public static class Speeds {
+        public static final double 
+                GRIPPER_SPEED = 0.1;
     }
 
     public static class Motors {
