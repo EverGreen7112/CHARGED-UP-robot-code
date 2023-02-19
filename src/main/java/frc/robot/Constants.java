@@ -18,6 +18,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public final class Constants {
     public final class Ports{
+        //tank drive chassis
         public static final int 
         LEFT_FRONT_PORT = 0,
         LEFT_MIDDLE_PORT = 0,
@@ -27,11 +28,20 @@ public final class Constants {
         RIGHT_BACK_PORT = 0
         ;
     }
-    
+    public final static class Values{
+        public static double 
+            TANKDRIVE_WHEEL_RADIUS = 4,
+            DISTANCE_BETWEEN_LEFT_TO_RIGHT = 0.5; //in meters;
+    }
     public final static  class Speeds{
         public final static Supplier<Double> driveMax = () -> {
            return SmartDashboard.getNumber("robot speed", 0.8);            
         };
+        public static double rpm2ms(double wheelRadius, double rpm){
+            double rps = rpm / 60;
+            return wheelRadius * 2 * Math.PI * rps;
+        }
+
     }
 
 }
