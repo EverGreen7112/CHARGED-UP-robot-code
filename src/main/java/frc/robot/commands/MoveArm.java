@@ -9,8 +9,8 @@ public class MoveArm extends CommandBase {
 
     private Vector2d destination; // where the arm needs to go
     private Vector2d startPos = new Vector2d(0, 0); // where the hand begins
-    private double arm1Length = Constants.Values.FIRST_ARM_LENGTH;// length of the arm 1
-    private double arm2Length = Constants.Values.SECOND_ARM_LENGTH;// length of the arm 2
+    private double arm1Length = Constants.ArmValues.FIRST_ARM_LENGTH;// length of the arm 1
+    private double arm2Length = Constants.ArmValues.SECOND_ARM_LENGTH;// length of the arm 2
     private double height; // height of the vector between startPos and destination
     private double width; // width of the vector between startPos and destination
     private double arm1Angle; // the angle the first arm in degrees

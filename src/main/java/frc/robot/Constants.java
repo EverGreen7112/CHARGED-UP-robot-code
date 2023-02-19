@@ -17,9 +17,24 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
+    public static class ArmValues {
+
+        public static final double 
+                FIRST_ARM_LENGTH = 0
+                ,SECOND_ARM_LENGTH = 0
+                ,FIRST_ARM_MIN = 0
+                ,FIRST_ARM_MAX = 0
+                ,SECOND_ARM_MIN = 0
+                ,SECOND_ARM_MAX = 0
+                ,JOYSTICK_TOLERANCE = 0.5
+                ,LIMIT_TOLERANCE = 5;
+    }
+
     public static class Values {
         public static final int TICKS_PER_REVOLUTIONS = 8196;
+    }
 
+    public static class PidValues {
         public static final double 
                 FIRST_ARM_KP = 0.0000001
                 ,FIRST_ARM_KI = 0
@@ -27,17 +42,6 @@ public final class Constants {
                 ,SECOND_ARM_KP = 0.00000001
                 ,SECOND_ARM_KI = 0
                 ,SECOND_ARM_KD = 0;
-
-        public static final double 
-                FIRST_ARM_LENGTH = 0
-                ,SECOND_ARM_LENGTH = 0;
-
-        public static final double 
-                FIRST_ARM_MIN = 0
-                ,FIRST_ARM_MAX = 0
-                ,SECOND_ARM_MIN = 0
-                ,SECOND_ARM_MAX = 0;
-
     }
 
     public static class MotorPorts {
