@@ -18,14 +18,15 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public final class Constants {
     public final class Ports{
-        public static final int 
-        LEFT_FRONT_PORT = 0,
-        LEFT_MIDDLE_PORT = 0,
-        LEFT_BACK_PORT = 0,
-        RIGHT_FRONT_PORT = 0,
-        RIGHT_MIDDLE_PORT = 0,
-        RIGHT_BACK_PORT = 0
-        ;
+      //tank drive chassis
+      public static final int 
+      LEFT_FRONT_PORT = 2,
+      LEFT_MIDDLE_PORT = 14,
+      LEFT_BACK_PORT = 10,
+      RIGHT_FRONT_PORT = 15,
+      RIGHT_MIDDLE_PORT = 12,
+      RIGHT_BACK_PORT = 11
+      ;
     }
     
     public final static  class Speeds{
