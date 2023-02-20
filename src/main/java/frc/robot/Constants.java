@@ -5,7 +5,6 @@
 package frc.robot;
 
 import java.util.function.Supplier;
-
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
@@ -20,20 +19,20 @@ public final class Constants {
     public final class Ports{
         //tank drive chassis
         public static final int 
-        LEFT_FRONT_PORT = 0,
-        LEFT_MIDDLE_PORT = 0,
-        LEFT_BACK_PORT = 0,
-        RIGHT_FRONT_PORT = 0,
-        RIGHT_MIDDLE_PORT = 0,
-        RIGHT_BACK_PORT = 0
+        LEFT_FRONT_PORT = 2,
+        LEFT_MIDDLE_PORT = 14,
+        LEFT_BACK_PORT = 10,
+        RIGHT_FRONT_PORT = 15,
+        RIGHT_MIDDLE_PORT = 12,
+        RIGHT_BACK_PORT = 11
         ;
     }
     public final static class Values{
         public static double 
-            TANKDRIVE_WHEEL_RADIUS = 4,
+            TANKDRIVE_WHEEL_RADIUS = 0.76,
             DISTANCE_BETWEEN_LEFT_TO_RIGHT = 0.5; //in meters;
     }
-    public final static  class Speeds{
+    public final static class Speeds{
         public final static Supplier<Double> driveMax = () -> {
            return SmartDashboard.getNumber("robot speed", 0.8);            
         };
@@ -43,5 +42,9 @@ public final class Constants {
         }
 
     }
-
+    public final static class JoystickPorts{
+        public static final int
+        RIGHT_JOYSTICK = 0,
+        LEFT_JOYSTICK = 1;
+    } 
 }

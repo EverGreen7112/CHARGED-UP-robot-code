@@ -3,6 +3,7 @@ package frc.robot.commands;
 import java.util.function.Supplier;
 
 import edu.wpi.first.wpilibj.drive.Vector2d;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.Chassis;
@@ -33,7 +34,9 @@ public class TankDrive extends CommandBase{
         lSpeed=v.x;
         rSpeed=v.y;
         Chassis.getInstance().driveTank(lSpeed, rSpeed);
-        
+       
+        SmartDashboard.putNumber("xSpeed", v.x);
+        SmartDashboard.putNumber("ySpeed", v.y);
     }
 
     @Override
