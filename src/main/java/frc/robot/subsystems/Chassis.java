@@ -59,5 +59,9 @@ public class Chassis extends SubsystemBase{
         //TODO: implement later
         return 0.3;
     }
+    public double getEncodersDist(){
+        //TODO: implement later
+        return 0.3;
+    }
     
 }
