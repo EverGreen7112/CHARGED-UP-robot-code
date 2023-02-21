@@ -33,11 +33,16 @@ public final class Constants {
         RIGHT_BACK_PORT = 0
         ;
     }
-    
-    public final static  class Speeds{
+    public final static class Speeds{
+        public final static double constantSpeed = 0.4;
+        public final static double constantPropConst = 0.07;
         public final static Supplier<Double> driveMax = () -> {
            return SmartDashboard.getNumber("robot speed", 0.8);            
         };
+        //use only in TurnUntilWithInRange
+      
+
+
     }
 
 }

@@ -55,6 +55,9 @@ public class Chassis extends SubsystemBase{
     public void stop(){
         driveTank(0.0, 0.0);
     }
-    
+    public double getRobotAngle(){
+        //TODO: implement later
+        return 0.3;
+    }
     
 }

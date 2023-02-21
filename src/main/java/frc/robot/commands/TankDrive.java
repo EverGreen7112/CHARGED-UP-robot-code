@@ -2,9 +2,9 @@ package frc.robot.commands;
 
 import java.util.function.Supplier;
 
-import edu.wpi.first.wpilibj.drive.Vector2d;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
+import frc.robot.Util.Vector2D;
 import frc.robot.subsystems.Chassis;
 
 public class TankDrive extends CommandBase{
@@ -22,11 +22,11 @@ public class TankDrive extends CommandBase{
     public void execute() {
         double rSpeed=-m_rightSupllier.get();
         double lSpeed=-m_leftSupllier.get();
-        Vector2d v=new Vector2d(lSpeed, rSpeed);
-        if(v.magnitude()>Constants.Speeds.driveMax.get()){
+        Vector2D v=new Vector2D(lSpeed, rSpeed);
+        if(v.getMagnitude()>Constants.Speeds.driveMax.get()){
             //normalizing the vector.
-            v.x/=(v.magnitude());
-            v.y/=(v.magnitude());
+            v.x/=(v.getMagnitude());
+            v.y/=(v.getMagnitude());
             v.x*=Constants.Speeds.driveMax.get();
             v.y*=Constants.Speeds.driveMax.get();
         }
