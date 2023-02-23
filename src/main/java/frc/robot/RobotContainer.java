@@ -24,9 +24,8 @@ public class RobotContainer {
 
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
 
-  private static final Joystick m_leftStick = new Joystick(Constants.JoystickPorts.LEFT_JOYSTICK);
+  public static final Joystick m_leftStick = new Joystick(Constants.JoystickPorts.LEFT_JOYSTICK);
   public static Command m_tankDriveCommand = new TankDrive(m_leftStick::getX,m_leftStick::getY);
-
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the button bindings

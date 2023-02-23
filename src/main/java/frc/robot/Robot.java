@@ -8,10 +8,9 @@ import com.kauailabs.navx.frc.AHRS;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
-import edu.wpi.first.math.geometry.Twist2d;
-import edu.wpi.first.math.kinematics.MecanumDriveOdometry;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
@@ -31,7 +30,7 @@ public class Robot extends TimedRobot {
   private long m_time;
   private double m_deltaTime; 
   private CANSparkMax m_frontRightWheel = new CANSparkMax(Constants.Ports.RIGHT_FRONT_PORT, MotorType.kBrushless);
-  private CANSparkMax m_frontLeftWheel  = new CANSparkMax(Constants.Ports.LEFT_FRONT_PORT,  MotorType.kBrushless);
+  private CANSparkMax m_frontLeftWheel  = new CANSparkMax(Constants.Ports.LEFT_MIDDLE_PORT,  MotorType.kBrushless);
   private AHRS m_navx = new AHRS(SPI.Port.kMXP);
   private double m_xPos = 0;
   private double m_yPos = 0;
@@ -46,6 +45,8 @@ public class Robot extends TimedRobot {
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
     m_time = System.currentTimeMillis();
+
+    SmartDashboard.putNumber("robot speed", 0.2);
   }
 
   /**
@@ -74,11 +75,27 @@ public class Robot extends TimedRobot {
     double leftSideAngle = leftSideDistance / Constants.Values.DISTANCE_BETWEEN_LEFT_TO_RIGHT;
     double rightSideAngle = rightSideDistance / Constants.Values.DISTANCE_BETWEEN_LEFT_TO_RIGHT;
     
-    double leftSideX  = Math.cos(leftSideAngle) * Constants.Values.DISTANCE_BETWEEN_LEFT_TO_RIGHT;
-    double leftSideY  = Math.sin(leftSideAngle) * Constants.Values.DISTANCE_BETWEEN_LEFT_TO_RIGHT;
-    
-    double rightSideX = Math.cos(rightSideAngle) * Constants.Values.DISTANCE_BETWEEN_LEFT_TO_RIGHT;
-    double rightSideY = Math.sin(rightSideAngle) * Constants.Values.DISTANCE_BETWEEN_LEFT_TO_RIGHT;
+    double leftSideX;
+    double leftSideY; 
+    if(leftSideAngle != 0){
+      leftSideX = Math.cos(leftSideAngle) * Constants.Values.DISTANCE_BETWEEN_LEFT_TO_RIGHT;
+      leftSideY = Math.sin(leftSideAngle) * Constants.Values.DISTANCE_BETWEEN_LEFT_TO_RIGHT;
+    }
+    else{
+      leftSideX = 0;
+      leftSideY = 0;
+    }
+      
+    double rightSideX;
+    double rightSideY; 
+    if(rightSideAngle != 0){
+      rightSideX = Math.cos(rightSideAngle) * Constants.Values.DISTANCE_BETWEEN_LEFT_TO_RIGHT;
+      rightSideY = Math.sin(rightSideAngle) * Constants.Values.DISTANCE_BETWEEN_LEFT_TO_RIGHT;
+    }
+    else{
+      rightSideX = 0;
+      rightSideY = 0;
+    }
 
     double deltaX = leftSideX + rightSideX;
     double deltaY = leftSideY + rightSideY;
@@ -88,6 +105,12 @@ public class Robot extends TimedRobot {
 
     SmartDashboard.putNumber("x", m_xPos);
     SmartDashboard.putNumber("y", m_yPos);
+    SmartDashboard.putNumber("delta time", m_deltaTime);
+    SmartDashboard.putNumber("RPM left velocity",  m_frontLeftWheel.getEncoder().getVelocity());
+    SmartDashboard.putNumber("RPM right velocity", m_frontRightWheel.getEncoder().getVelocity());
+    SmartDashboard.putNumber("ms left velocity", Constants.Speeds.rpm2ms(Constants.Values.TANKDRIVE_WHEEL_RADIUS, m_frontLeftWheel.getEncoder().getVelocity()));
+    SmartDashboard.putNumber("ms right velocity", Constants.Speeds.rpm2ms(Constants.Values.TANKDRIVE_WHEEL_RADIUS, m_frontRightWheel.getEncoder().getVelocity()));
+    
     m_time = System.currentTimeMillis();
 
   }
@@ -123,6 +146,7 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
+    
   }
 
   /** This function is called periodically during operator control. */
@@ -133,14 +157,17 @@ public class Robot extends TimedRobot {
   public void testInit() {
     // Cancels all running commands at the start of test mode.
     CommandScheduler.getInstance().cancelAll();
+    CommandScheduler.getInstance().schedule(RobotContainer.m_tankDriveCommand);
   }
 
   /** This function is called periodically during test mode. */
   @Override
   public void testPeriodic() {
 
-    RobotContainer.m_tankDriveCommand.execute();
-    
+    //RobotContainer.m_tankDriveCommand.execute();
+    CommandScheduler.getInstance().run();
+    m_frontRightWheel.set(0.1);
+    m_frontLeftWheel.set(0.1);
   }
 
   /** This function is called once when the robot is first started up. */
