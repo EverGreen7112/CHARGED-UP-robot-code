@@ -9,6 +9,12 @@ import frc.robot.subsystems.Chassis;
  */
 public class TurnUntilWithInRange extends CommandBase {
     public double m_minAng, m_maxAng;
+    private double m_endAng = -1;
+    @Override
+    public void schedule(boolean interruptible) {
+        // TODO Auto-generated method stub
+        super.schedule(interruptible);
+    }
 
     public TurnUntilWithInRange(double minAng, double maxAng) {
         addRequirements(Chassis.getInstance());
@@ -39,14 +45,31 @@ public class TurnUntilWithInRange extends CommandBase {
             }
         }
     }
+
     @Override
     public boolean isFinished() {
+        if (inRange()&&this.isScheduled()) {
+            m_endAng = Chassis.getInstance().getRobotAngle();
+        }
         return inRange();
     }
+
     @Override
     public void end(boolean interrupted) {
         Chassis.getInstance().stop();
     }
 
-    
+    /**
+     * 
+     * @return the angle in which the command has been finished, if the command
+     *         havent been finished return -1,
+     *         <p>
+     *         edge case: if the command ran more then one time it will return the
+     *         angle at the last time the robot stopped
+     *         </p>
+     */
+    public double endAng() {
+        return m_endAng;
+    }
+
 }

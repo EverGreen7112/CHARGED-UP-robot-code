@@ -50,5 +50,13 @@ public final class Constants {
     public final static double driveKp = 0.05;
     public final static double driveKi = 0.007;
     public final static double driveKd = 0.007;
+    public final static double drivePTolerance =0.02;
+    public final static double driveVTolerance =1;
+    
+    public final static double rotateKp = 0.05/75;
+    public final static double rotateKi = 0.007/75;
+    public final static double rotateKd = 0.007/75;
+    public final static double rotatePTolerance =2;
+    public final static double rotateVTolerance =10;
     }
 }
