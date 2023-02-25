@@ -58,5 +58,11 @@ public final class Constants {
     public final static double rotateKd = 0.007/75;
     public final static double rotatePTolerance =2;
     public final static double rotateVTolerance =10;
+
+    public final static double velKp = 0.05/75;
+    public final static double velKi = 0.007/75;
+    public final static double velKd = 0.007/75;
+    public final static double velPTolerance =2;
+    public final static double velVTolerance =10;
     }
 }
