@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.Subsystem;
 import frc.robot.Constants;
 import frc.robot.Util.Vector2D;
+import frc.robot.commands.ChassisPid.ChasisSetPointPosPID;
 import frc.robot.subsystems.Chassis;
 
 public class Commands {
@@ -84,10 +85,7 @@ public class Commands {
                 Constants.PIDS.driveKd);
         double startLocation = Chassis.getInstance().getEncodersDist();
         driveController.setTolerance(Constants.PIDS.drivePTolerance, Constants.PIDS.driveVTolerance);
-        PIDCommand driveToIntresection = new PIDSetPointCommand(
-                driveController,
-                () -> Chassis.getInstance().getEncodersDist() - startLocation, intresectingSetPoint,
-                Chassis.getInstance()::driveStraight, (Subsystem) Chassis.getInstance());
+        CommandBase driveToIntresection = new ChasisSetPointPosPID(intresectingSetPoint);
 
         // create pid command to rotate to desired angle
         PIDController rotateController = new PIDController(Constants.PIDS.rotateKp, Constants.PIDS.rotateKi,
@@ -111,10 +109,7 @@ public class Commands {
             Vector2D intreToEnd = normalEnd.getSubtracted(intersection);
             return intreToEnd.getMagnitude();
         };
-        PIDCommand driveToOverlap = new PIDSetPointCommand(
-            driveController,
-            () -> Chassis.getInstance().getEncodersDist() - startLocation, overlapSetPoint,
-            Chassis.getInstance()::driveStraight, (Subsystem) Chassis.getInstance());
+        CommandBase driveToOverlap = new ChasisSetPointPosPID(overlapSetPoint);
         
         return new SequentialCommandGroup(turnUntilWithinRange,driveToIntresection,rotateToOverlap,driveToOverlap);
     }
